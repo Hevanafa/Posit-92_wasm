@@ -88,21 +88,25 @@ begin
     F32Power := F32Power * i;
 end;
 
-function Floor(const value: double): longint;
+function Floor(const value: double): integer;
 begin
-  if (value >= 0) or (frac(value) = 0) then
-    Floor := trunc(value)
-  else
-    Floor := trunc(value) - 1;
+  if value < 0 then begin
+    if trunc(value) = value then
+      Floor := trunc(value)
+    else
+      Floor := trunc(value - 1);
+  end else
+    Floor := trunc(value);
 end;
 
-function Ceil(const value: double): longint;
+function Ceil(const value: double): integer;
 begin
-  if frac(value) = 0 then
-    Ceil := trunc(value)
-  else if value > 0 then
-    Ceil := trunc(value) + 1
-  else  { negative numbers }
+  if value > 0 then begin
+    if trunc(value) = value then
+      Ceil := trunc(value)
+    else
+      Ceil := trunc(value + 1);
+  end else
     Ceil := trunc(value);
 end;
 
